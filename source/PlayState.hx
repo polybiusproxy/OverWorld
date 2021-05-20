@@ -11,6 +11,8 @@ class PlayState extends FlxState
 	var dimensionsText:FlxText;
 	var overworldInfo:FlxText;
 
+	var statusText:FlxText;
+
 	var daPlayer = new FlxSprite();
 	var daGround = new FlxSprite();
 
@@ -24,12 +26,16 @@ class PlayState extends FlxState
 		overworldInfo = new FlxText(0, dimensionsText.y + 20, "OverWorld - " + FlxG.VERSION, 15);
 		add(overworldInfo);
 
+		statusText = new FlxText(FlxG.width - 160 - 2, 2, 160, "Placeholder lol!");
+		statusText.setFormat(null, 15, FlxColor.WHITE, RIGHT, NONE, FlxColor.BLACK);
+		add(statusText);
+
 		daPlayer.makeGraphic(100, 100, FlxColor.WHITE);
-		daPlayer.screenCenter();
+		daPlayer.x = FlxG.width / 2;
 		add(daPlayer);
 
-		daGround.makeGraphic(FlxG.width, 360, FlxColor.RED);
-		daGround.screenCenter();
+		daGround.makeGraphic(FlxG.width, 200, FlxColor.RED);
+		daGround.y = FlxG.height - daGround.height;
 		add(daGround);
 	}
 
