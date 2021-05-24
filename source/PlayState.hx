@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
@@ -32,15 +33,43 @@ class PlayState extends FlxState
 
 		daPlayer.makeGraphic(100, 100, FlxColor.WHITE);
 		daPlayer.x = FlxG.width / 2;
+		daPlayer.maxVelocity.set(80, 200);
+		daPlayer.acceleration.y = 200;
+		daPlayer.drag.x = daPlayer.maxVelocity.x * 4;
 		add(daPlayer);
 
 		daGround.makeGraphic(FlxG.width, 200, FlxColor.RED);
 		daGround.y = FlxG.height - daGround.height;
+		daGround.immovable = true;
 		add(daGround);
 	}
 
 	override public function update(elapsed:Float)
 	{
+		daPlayer.acceleration.x = 0;
+
+		if (FlxG.keys.anyPressed([LEFT, A]))
+		{
+			daPlayer.acceleration.x = -daPlayer.maxVelocity.x * 4;
+		}
+
+		if (FlxG.keys.anyPressed([RIGHT, D]))
+		{
+			daPlayer.acceleration.x = daPlayer.maxVelocity.x * 4;
+		}
+
+		if (FlxG.keys.anyJustPressed([SPACE, UP, W]) && daPlayer.isTouching(FlxObject.FLOOR))
+		{
+			daPlayer.velocity.y = -daPlayer.maxVelocity.y / 2;
+		}
+
 		super.update(elapsed);
+
+		FlxG.collide();
+
+		if (daPlayer.y > FlxG.height)
+		{
+			FlxG.resetState();
+		}
 	}
 }
