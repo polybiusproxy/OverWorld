@@ -27,14 +27,14 @@ class PlayState extends FlxState
 		overworldInfo = new FlxText(0, dimensionsText.y + 20, "OverWorld - " + FlxG.VERSION, 15);
 		add(overworldInfo);
 
-		statusText = new FlxText(FlxG.width - 160 - 2, 2, 160, "Placeholder lol!");
+		statusText = new FlxText(FlxG.width - 160 - 2, 2, 160, "Made by PolybiusProxy");
 		statusText.setFormat(null, 15, FlxColor.WHITE, RIGHT, NONE, FlxColor.BLACK);
 		add(statusText);
 
 		daPlayer.makeGraphic(100, 100, FlxColor.WHITE);
 		daPlayer.x = FlxG.width / 2;
-		daPlayer.maxVelocity.set(80, 200);
-		daPlayer.acceleration.y = 200;
+		daPlayer.maxVelocity.x = 500;
+		daPlayer.acceleration.y = 1000;
 		daPlayer.drag.x = daPlayer.maxVelocity.x * 4;
 		add(daPlayer);
 
@@ -50,17 +50,24 @@ class PlayState extends FlxState
 
 		if (FlxG.keys.anyPressed([LEFT, A]))
 		{
-			daPlayer.acceleration.x = -daPlayer.maxVelocity.x * 4;
+			daPlayer.acceleration.x -= daPlayer.drag.x;
 		}
 
 		if (FlxG.keys.anyPressed([RIGHT, D]))
 		{
-			daPlayer.acceleration.x = daPlayer.maxVelocity.x * 4;
+			daPlayer.acceleration.x += daPlayer.drag.x;
 		}
+
+		// For reference later!
+
+		// if (FlxG.keys.anyJustPressed([SPACE, UP, W]) && daPlayer.isTouching(FlxObject.FLOOR))
+		// {
+		// daPlayer.velocity.y = -daPlayer.maxVelocity.y / 2;
+		// }
 
 		if (FlxG.keys.anyJustPressed([SPACE, UP, W]) && daPlayer.isTouching(FlxObject.FLOOR))
 		{
-			daPlayer.velocity.y = -daPlayer.maxVelocity.y / 2;
+			daPlayer.velocity.y = -daPlayer.acceleration.y * 0.51;
 		}
 
 		super.update(elapsed);
