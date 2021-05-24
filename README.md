@@ -30,10 +30,12 @@ HTML5 (browser basically):
 lime test html5
 ```
 
+
 Flash (are you sure you want building for flash?):
 ```haxe
 lime test flash
 ```
+
 
 Windows:
 Woah, buddy... For this one there are TWO ways to build for Windows.
@@ -48,11 +50,19 @@ lime setup windows
 lime test windows
 ```
 
+
 Neko (boooooh! da ugly and grossy way):
-So... you dont't want to wait, or your PC is literally a toaster.
+So... you don't want to wait, or your PC is literally a toaster.
 OK then.
 ```haxe
 lime test neko
+```
+
+
+HashLink (same as neko):
+This requires a long setup.
+```bash
+lime test hl
 ```
 
 ## Contributing
