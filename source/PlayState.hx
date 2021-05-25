@@ -31,6 +31,11 @@ class PlayState extends FlxState
 		statusText.setFormat(null, 15, FlxColor.WHITE, RIGHT, NONE, FlxColor.BLACK);
 		add(statusText);
 
+		#if debug
+		var Player:Player = new Player(false);
+		add(Player);
+		#end
+
 		daPlayer.makeGraphic(100, 100, FlxColor.WHITE);
 		daPlayer.x = FlxG.width / 2;
 		daPlayer.maxVelocity.x = 500;
