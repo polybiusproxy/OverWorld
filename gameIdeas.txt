@@ -1,0 +1,2 @@
+- Rocket Mode (power-up to make you fly for a few seconds)
+- Walking on ice will cause a drift

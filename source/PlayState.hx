@@ -14,7 +14,7 @@ class PlayState extends FlxState
 
 	var statusText:FlxText;
 
-	var daPlayer = new FlxSprite();
+	var daPlayer:Player;
 	var daGround = new FlxSprite();
 
 	override public function create()
@@ -27,23 +27,15 @@ class PlayState extends FlxState
 		overworldInfo = new FlxText(0, dimensionsText.y + 20, "OverWorld - " + FlxG.VERSION, 15);
 		add(overworldInfo);
 
-		statusText = new FlxText(FlxG.width - 160 - 2, 2, 160, "Made by PolybiusProxy");
+		statusText = new FlxText(FlxG.width - 160 - 2, 2, 160, "Welcome!");
 		statusText.setFormat(null, 15, FlxColor.WHITE, RIGHT, NONE, FlxColor.BLACK);
 		add(statusText);
 
-		#if debug
-		var Player:Player = new Player(false);
-		add(Player);
-		#end
-
-		daPlayer.makeGraphic(100, 100, FlxColor.WHITE);
+		daPlayer = new Player(0, 0);
 		daPlayer.x = FlxG.width / 2;
-		daPlayer.maxVelocity.x = 500;
-		daPlayer.acceleration.y = 1000;
-		daPlayer.drag.x = daPlayer.maxVelocity.x * 4;
 		add(daPlayer);
 
-		daGround.makeGraphic(FlxG.width, 200, FlxColor.RED);
+		daGround.makeGraphic(FlxG.width, 200, FlxColor.BROWN);
 		daGround.y = FlxG.height - daGround.height;
 		daGround.immovable = true;
 		add(daGround);
@@ -51,18 +43,6 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
-		daPlayer.acceleration.x = 0;
-
-		if (FlxG.keys.anyPressed([LEFT, A]))
-		{
-			daPlayer.acceleration.x -= daPlayer.drag.x;
-		}
-
-		if (FlxG.keys.anyPressed([RIGHT, D]))
-		{
-			daPlayer.acceleration.x += daPlayer.drag.x;
-		}
-
 		// For reference later!
 
 		// if (FlxG.keys.anyJustPressed([SPACE, UP, W]) && daPlayer.isTouching(FlxObject.FLOOR))
